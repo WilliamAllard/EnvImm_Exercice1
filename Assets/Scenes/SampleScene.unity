@@ -131,7 +131,6 @@ GameObject:
   - component: {fileID: 141259572}
   - component: {fileID: 141259571}
   - component: {fileID: 141259570}
-  - component: {fileID: 141259574}
   - component: {fileID: 141259569}
   m_Layer: 6
   m_Name: SphereEnMouvement
@@ -241,39 +240,12 @@ Transform:
   m_GameObject: {fileID: 141259568}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03852, y: 2, z: 0.78783}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.56, y: 2, z: 3.79}
+  m_LocalScale: {x: 4.4421735, y: 4.290585, z: 4.317678}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &141259574
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 141259568}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,7 +718,8 @@ MonoBehaviour:
   objetAPlacer: {fileID: 6864452121081114320, guid: b06da2d5a5833224ab9fb0e902664d42, type: 3}
   layerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 55
+  maxObjet: 100
 --- !u!4 &1043970270
 Transform:
   m_ObjectHideFlags: 0

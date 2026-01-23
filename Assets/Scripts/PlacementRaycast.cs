@@ -21,7 +21,6 @@ public class PlacementRaycast : MonoBehaviour
     {
         // Créer une instance des Input Actions
         inputActions = new PlayerInputActions();
-        layerMask = ~LayerMask.GetMask("Ignorable"); // Faut que je mettre ceci pour que sa marche
         indicateurCouleur.ChangeCouleur(couleurObjet);
     }
     
@@ -57,6 +56,7 @@ public class PlacementRaycast : MonoBehaviour
         
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
         {
+            Debug.Log("Touché : " + hit.collider.gameObject.name);
             Debug.DrawRay(ray.origin, ray.direction * 100, Color.aquamarine, 5f);
             
             Vector3 positionAjustee = hit.point + hit.normal * 0.25f;
