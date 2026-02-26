@@ -6,8 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/PeintureVR.unity
+    guid: 01f755df0852b1e4f871daae2d59b3ed
   m_configObjects:
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 0085b70739682fa419ea6dfbcf7da25c, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 0e04dbfb39786d845b0972aa6b4da5f0, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 1ed7377a5f6b4404ba2676804329e854, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: ba8a6a446680d7146b691b7a7d933f67, type: 2}
   m_UseUCBPForAssetBundles: 0

@@ -118,6 +118,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Point"",
+                    ""type"": ""Button"",
+                    ""id"": ""37281f76-e3a3-4741-ac00-ec90529890c4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -197,6 +206,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Color_Switch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b3b94f13-420b-4f52-a602-ceb6b3a5000d"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Point"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -208,6 +228,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Players_Click_Add = m_Players.FindAction("Click_Add", throwIfNotFound: true);
         m_Players_Click_Remove = m_Players.FindAction("Click_Remove", throwIfNotFound: true);
         m_Players_Color_Switch = m_Players.FindAction("Color_Switch", throwIfNotFound: true);
+        m_Players_Point = m_Players.FindAction("Point", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -291,6 +312,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Players_Click_Add;
     private readonly InputAction m_Players_Click_Remove;
     private readonly InputAction m_Players_Color_Switch;
+    private readonly InputAction m_Players_Point;
     /// <summary>
     /// Provides access to input actions defined in input action map "Players".
     /// </summary>
@@ -314,6 +336,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Players/Color_Switch".
         /// </summary>
         public InputAction @Color_Switch => m_Wrapper.m_Players_Color_Switch;
+        /// <summary>
+        /// Provides access to the underlying input action "Players/Point".
+        /// </summary>
+        public InputAction @Point => m_Wrapper.m_Players_Point;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -349,6 +375,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Color_Switch.started += instance.OnColor_Switch;
             @Color_Switch.performed += instance.OnColor_Switch;
             @Color_Switch.canceled += instance.OnColor_Switch;
+            @Point.started += instance.OnPoint;
+            @Point.performed += instance.OnPoint;
+            @Point.canceled += instance.OnPoint;
         }
 
         /// <summary>
@@ -369,6 +398,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Color_Switch.started -= instance.OnColor_Switch;
             @Color_Switch.performed -= instance.OnColor_Switch;
             @Color_Switch.canceled -= instance.OnColor_Switch;
+            @Point.started -= instance.OnPoint;
+            @Point.performed -= instance.OnPoint;
+            @Point.canceled -= instance.OnPoint;
         }
 
         /// <summary>
@@ -430,5 +462,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnColor_Switch(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Point" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPoint(InputAction.CallbackContext context);
     }
 }

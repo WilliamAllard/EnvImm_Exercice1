@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 public class PlacementRaycast : MonoBehaviour
 {
@@ -17,6 +20,8 @@ public class PlacementRaycast : MonoBehaviour
 
     public int maxObjet = 10;
     
+    [SerializeField] private ARRaycastManager arRaycastManager;
+    
     void Awake()
     {
         // Créer une instance des Input Actions
@@ -27,7 +32,7 @@ public class PlacementRaycast : MonoBehaviour
     void OnEnable()
     {
         // IMPORTANT : Activer les actions
-        inputActions.Players.Click_Add.performed += OnInputClickAdd;
+        inputActions.Players.Click_Add.performed += OnTap;
         inputActions.Players.Click_Remove.performed += OnInputClickRemove;
         inputActions.Players.Color_Switch.performed += OnInputColorChange;
         inputActions.Enable();
@@ -36,7 +41,7 @@ public class PlacementRaycast : MonoBehaviour
     void OnDisable()
     {
         // IMPORTANT : Désactiver pour éviter les fuites mémoire
-        inputActions.Players.Click_Add.performed -= OnInputClickAdd;
+        inputActions.Players.Click_Add.performed -= OnTap;
         inputActions.Players.Click_Remove.performed -= OnInputClickRemove;
         inputActions.Players.Color_Switch.performed -= OnInputColorChange;
         inputActions.Disable();
@@ -69,6 +74,50 @@ public class PlacementRaycast : MonoBehaviour
             ++nombreObjetPlacer;
         }
     }
+
+    private void OnTap(InputAction.CallbackContext context)
+    {
+        // Obtenir la position du touch/clic
+        Vector2 touchPosition = inputActions.Players.Point.ReadValue<Vector2>();
+        
+        // Liste pour stocker les résultats du raycast AR
+        List<ARRaycastHit> hits = new List<ARRaycastHit>();
+        
+        if (arRaycastManager.Raycast(touchPosition, hits, TrackableType.PlaneWithinPolygon))
+        {
+            Pose hitPose = hits[0].pose;
+
+            // Obtenir le plan touché
+            ARPlane plane = hits[0].trackable as ARPlane;
+
+            // Adapter selon le type de plan
+            Vector3 position = hitPose.position;
+
+            if (plane.alignment == PlaneAlignment.HorizontalUp)
+            {
+                // Sol ou table - position normale
+                position += Vector3.up * 0.25f; // Légèrement au-dessus
+            }
+            else if (plane.alignment == PlaneAlignment.Vertical)
+            {
+                // Mur - peut-être coller au mur ?
+                position += plane.normal * 0.1f; // Légèrement devant le mur
+            }
+
+            GameObject nouveauCube = Instantiate(objetAPlacer, position, Quaternion.identity);
+
+            // Appliquer couleur
+            Renderer renderer = nouveauCube.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.material.color = couleurObjet;
+            }
+
+            nouveauCube.tag = "Cube";
+
+            Debug.Log($"Cube placé sur : {plane.alignment}");
+        }
+    }
     
     void OnInputClickRemove(InputAction.CallbackContext context)
     {
@@ -86,6 +135,21 @@ public class PlacementRaycast : MonoBehaviour
             {
                 --nombreObjetPlacer;
                 Destroy(hit.transform.gameObject);
+            }
+        }
+    }
+    
+    private void OnDelete(InputAction.CallbackContext context)
+    {
+        Vector2 touchPosition = inputActions.Players.Point.ReadValue<Vector2>();
+
+        // On peut utiliser le raycast CLASSIQUE pour toucher les cubes
+        Ray ray = Camera.main.ScreenPointToRay(touchPosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            if (hit.collider.CompareTag("Cube"))
+            {
+                Destroy(hit.collider.gameObject);
             }
         }
     }

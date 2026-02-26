@@ -5,11 +5,13 @@ TagManager:
   serializedVersion: 3
   tags:
   - Cube
+  - Canvas
+  - CubePeint
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Canvas
   - Water
   - UI
   - Ignorable
@@ -36,7 +38,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - XR Simulation
   - 
   m_SortingLayers:
   - name: Default
