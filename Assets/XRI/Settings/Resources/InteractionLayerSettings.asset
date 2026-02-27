@@ -18,9 +18,9 @@ MonoBehaviour:
   - Peint
   - 
   - 
-  - 
-  - 
-  - 
+  - Sphere
+  - Cylinder
+  - Capsule
   - 
   - 
   - 
