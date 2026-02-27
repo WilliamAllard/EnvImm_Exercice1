@@ -11,7 +11,6 @@ public class PeintureVR : MonoBehaviour
 
     [Header("Input Actions")]
     [SerializeField] private InputActionReference actionGachetteDroite;
-    [SerializeField] private InputActionReference actionGachetteGauche;
 
     [Header("Paramètres")]
     [SerializeField] private float porteeRayon = 5f;
@@ -21,13 +20,11 @@ public class PeintureVR : MonoBehaviour
     void OnEnable()
     {
         actionGachetteDroite.action.performed += OnGachetteDroite;
-        actionGachetteGauche.action.performed += OnGachetteGauche;
     }
 
     void OnDisable()
     {
         actionGachetteDroite.action.performed -= OnGachetteDroite;
-        actionGachetteGauche.action.performed -= OnGachetteGauche;
     }
 
     private void OnGachetteDroite(InputAction.CallbackContext context)
@@ -40,20 +37,6 @@ public class PeintureVR : MonoBehaviour
             if (hit.collider.CompareTag("Canvas"))
             {
                 PlacerCube(hit.point, hit.normal);
-            }
-        }
-    }
-
-    private void OnGachetteGauche(InputAction.CallbackContext context)
-    {
-        Ray rayon = new Ray(originRayonGauche.position, originRayonGauche.forward);
-        RaycastHit hit;
-
-        if (Physics.Raycast(rayon, out hit, porteeRayon))
-        {
-            if (hit.collider.CompareTag("CubePeint"))
-            {
-                Destroy(hit.collider.gameObject);
             }
         }
     }
