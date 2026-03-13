@@ -17,6 +17,9 @@ public class GestionnaireTri : MonoBehaviour
 
     public float scoreInitial = 1000;
     public float pointPerduParsSeconde = 10;
+    
+    [SerializeField] private XRBaseInputInteractor controleurGauche;
+    [SerializeField] private XRBaseInputInteractor controleurDroit;
 
     private void Awake()
     {
@@ -31,8 +34,6 @@ public class GestionnaireTri : MonoBehaviour
             timer += Time.deltaTime;
             statusText.text = timer.ToString("F2");
         }
-        
-        
     }
 
     void OnEnable()
@@ -103,6 +104,7 @@ public class GestionnaireTri : MonoBehaviour
             int scoreFinial = CalculerScore();
             statusText.text = "Bravo ! Tri complété. Score Final : " + scoreFinial;
             timerActive = false;
+            DeclencherVictoireHaptique();
         }
     }
 
@@ -110,5 +112,11 @@ public class GestionnaireTri : MonoBehaviour
     {
         float scoreCalculer = scoreInitial - (timer * pointPerduParsSeconde);
         return Mathf.Max(0, Mathf.RoundToInt(scoreCalculer));
+    }
+    
+    private void DeclencherVictoireHaptique()
+    {
+        controleurDroit.SendHapticImpulse(1.0f, 2);
+        controleurGauche.SendHapticImpulse(1.0f, 2);
     }
 }
